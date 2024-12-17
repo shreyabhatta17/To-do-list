@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+    
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+
+            if (taskInput.value.trim() === '') {
+                alert("Please enter a task!");
+                return;
+            }
+
+            // Create a new list item
+            const li = document.createElement('li');
+            li.textContent = taskInput.value;
+
+            // Add a "done" feature
+            li.addEventListener('click', function() {
+                this.classList.toggle('completed');
+            });
+
+            // Add a delete button
+            const deleteBtn = document.createElement('span');
+            deleteBtn.textContent = '×';
+            deleteBtn.classList.add('delete');
+            deleteBtn.addEventListener('click', function() {
+                li.remove();
+            });
+
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+
+            // Clear the input
+            taskInput.value = '';
+        }
+    </script>
+</body>
+</html>
